@@ -1,0 +1,25 @@
+server:
+  port: 9191
+
+spring:
+  application:
+    name: API-GATEWAY
+
+  cloud:
+    gateway:
+      routes:
+        - id: sinhvien-service
+          uri: lb://sinhvien-service
+          predicates:
+            - Path=/sv/**
+        - id: DEPARTMENT-SERVICE
+          uri: lb://khoa-service
+          predicates:
+            - Path=/khoa/**
+
+  config:
+
+    cloud:
+      config:
+        name: config-server
+        uri: http://localhost:8888
